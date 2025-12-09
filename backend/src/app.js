@@ -7,6 +7,11 @@ import mongoSanitize from 'express-mongo-sanitize';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 import connectDB from './config/database.js';
 import corsOptions from './config/corsOptions.js';
@@ -17,6 +22,7 @@ import authRoutes from './routes/auth.js';
 import postRoutes from './routes/posts.js';
 import commentRoutes from './routes/comments.js';
 import uploadRoutes from './routes/upload.js';
+import userRoutes from './routes/users.js';
 
 dotenv.config();
 
@@ -56,6 +62,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/users', userRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
